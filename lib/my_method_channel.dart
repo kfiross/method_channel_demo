@@ -12,7 +12,7 @@ class MyMethodChannel{
   }
 
   // example with arguments
-  static Future<double> getCalculation(int n1, int n2) async {
+  static Future<int> getCalculation(int n1, int n2) async {
     final sum = await _channel.invokeMethod('getCalculation', {
       "first": n1,
       "second": n2,

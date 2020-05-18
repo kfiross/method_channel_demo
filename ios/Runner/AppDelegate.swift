@@ -8,10 +8,10 @@ import Flutter
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-    let myChannel = FlutterMethodChannel(name: "test,
+    let myChannel = FlutterMethodChannel(name: "test",
                                                 binaryMessenger: controller.binaryMessenger)
 
-    controller.setMethodCallHandler({
+    myChannel.setMethodCallHandler({
           (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
           switch(call.method){
              case "getPlatformVersion":
@@ -39,13 +39,13 @@ import Flutter
 
     public func getCalculation(call: FlutterMethodCall, result: @escaping FlutterResult) {
       let args = call.arguments as! Dictionary<String, Any>
-      let n1 = args["n1"] as? Int
-      let n2 = args["n2"] as? Int
+      let n1 = args["first"] as? Int
+      let n2 = args["second"] as? Int
 
       if(n1 == nil || n2 == nil) {
          result(FlutterError(code: "ERROR",message: "can only sum integers", details: nil))
       }
 
-      result(n1 + n2)
+      result(n1! + n2!)
     }
 }
